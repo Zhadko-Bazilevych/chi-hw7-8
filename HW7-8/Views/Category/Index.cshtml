@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HW7_8.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="d-flex justify-content-between">
+    <div class="h1">Категории</div> 
+    <div class="text-danger fs-2">@ViewBag.DeleteCategoryError</div>
+</div>
+
+<p>
+    <a asp-action="Create">Создать категорию</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Номер
+            </th>
+            <th>
+                Название
+            </th>
+            <th>
+                Действия
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Select((value, index) => (value, index))) {
+            <tr>
+                <td>
+                    @(item.index + 1)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.value.Name)
+            </td>
+            <td>
+                    @Html.ActionLink("Изменить", "Edit", new { id = item.value.Id })
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.value.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
