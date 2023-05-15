@@ -1,0 +1,49 @@
+﻿@model HW7_8.Models.ExpensesByMonthViewModel
+
+@{
+    ViewData["Title"] = "GetByMonth";
+}
+
+<h1>Статистика за месяцы</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Месяц
+                </th>
+                @foreach(var head in Model.CategoryNames)
+                {
+                    <th>
+                        @head
+                    </th>
+                }
+                <th>
+                    Всего
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.MonthData)
+            {
+                <tr>
+                    <td>
+                        @row.Month
+                    </td>
+                    @for(int i = 0; i < row.Expenses.Count(); i++)
+                    {
+                        <td>
+                            @row.Expenses[i]
+                        </td>
+                    }
+                    <td>
+                        @Math.Round(row.Expenses.Sum(), 2)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+</div>
